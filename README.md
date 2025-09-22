@@ -8,13 +8,13 @@ Traffic signs are critical for ensuring road safety as they convey essential inf
 
 ### Example Images
 - **Stop Sign**:  
-  ![Stop Sign](data/Test/00111.png)
+  ![Stop Sign](Dataset/test/00111.png)
 
 - **Yield Sign**:  
-  ![Yield Sign](data/Test/00120.png)
+  ![Yield Sign](Dataset/test/00120.png)
 
 - **Speed Limit Sign**:  
-  ![Speed Limit Sign](data/Test/00122.png)
+  ![Speed Limit Sign](Dataset/test/00122.png)
 
 ## Datasets
 The dataset used for this project is the **German Traffic Sign Recognition Benchmark (GTSRB)**. It contains over 50,000 images categorized into 43 classes of traffic signs.
@@ -112,3 +112,4 @@ streamlit run scripts/streamlit_app.py -- --model_path models/best_model.h5
 - **License**: Ensure you have a LICENSE file if you include a license section.
 
 This `README.md` provides a comprehensive overview of your project, making it easy for users to understand its purpose and how to use it effectively. Let me know if you need further adjustments or additions!
+
