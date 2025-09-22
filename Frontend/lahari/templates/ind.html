@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YOLO Image Predictor</title>
+    <style>
+        body { font-family: Arial, sans-serif; display: flex; flex-direction: column; align-items: center; }
+        .container { text-align: center; padding: 20px; max-width: 800px; }
+        img { max-width: 100%; height: auto; margin-top: 20px; border: 1px solid #ddd; border-radius: 5px; }
+        .btn-upload { padding: 10px 20px; font-size: 16px; cursor: pointer; }
+        .predictions { margin-top: 20px; text-align: left; }
+        .prediction-item { margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Upload an Image for YOLO Prediction</h2>
+        <input type="file" id="upload" accept="image/*" class="btn-upload">
+        <button onclick="uploadImage()">Predict</button>
+        <div id="output">
+            <img id="predicted-image" style="display:none;">
+            <div id="predictions" class="predictions" style="display:none;"></div>
+        </div>
+    </div>
+
+    <script>
+        async function uploadImage() {
+            const uploadInput = document.getElementById("upload");
+            if (uploadInput.files.length === 0) {
+                alert("Please upload an image first.");
+                return;
+            }
+
+            const file = uploadInput.files[0];
+            const formData = new FormData();
+            formData.append("file", file);
+
+            const response = await fetch("http://127.0.0.1:5000/predict", {
+                method: "POST",
+                body: formData
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                
+                // Display the annotated image
+                const imgElement = document.getElementById("predicted-image");
+                imgElement.src = "data:image/jpeg;base64," + data.image_data;
+                imgElement.style.display = "block";
+                
+                // Display predictions
+                const predictionsElement = document.getElementById("predictions");
+                predictionsElement.innerHTML = '';  // Clear previous predictions
+                predictionsElement.style.display = "block";
+
+                data.predictions.forEach(prediction => {
+                    const item = document.createElement("div");
+                    item.className = "prediction-item";
+                    item.innerHTML = `
+                        <strong>Class:</strong> ${prediction.class}<br>
+                        <strong>Confidence:</strong> ${(prediction.confidence * 100).toFixed(2)}%<br>
+                        <strong>Bounding Box:</strong> [${prediction.bbox.join(', ')}]
+                    `;
+                    predictionsElement.appendChild(item);
+                });
+            } else {
+                alert("Error: Could not process the image.");
+            }
+        }
+    </script>
+</body>
+</html>
