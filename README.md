@@ -1,23 +1,27 @@
 # Traffic Sign Recognition
 
 ## Overview 
-This project implements a Traffic Sign Recognition system using Convolutional Neural Networks (CNN) to classify images of traffic signs. The aim is to build an automated system that accurately recognizes and classifies various traffic signs from images, contributing to the development of advanced driver-assistance systems (ADAS) and autonomous vehicles.
+This project utilizes the "Self-Driving Cars - v6 Version 4" dataset to develop a computer vision model for identifying road signs. The dataset consists of 4969 images, with signs annotated in the YOLOv8 format. Each image has been pre-processed by resizing it to a fixed resolution of 416x416 pixels. This project's goal is to train a robust model that can accurately detect and classify various road signs, which is a crucial component for autonomous vehicle navigation systems.
 
 ### Problem Statement
 Traffic signs are critical for ensuring road safety as they convey essential information to drivers. An automated recognition system can help improve safety and efficiency on the roads. For example, a system should recognize a "Stop" sign and alert the driver to stop the vehicle, thereby preventing accidents.
 
 ### Example Images
 - **Stop Sign**:  
-  ![Stop Sign](Dataset/test/00111.png)
+  ![Stop Sign](Dataset/test/images/00014_00004_00020_png.rf.e3b35f3ca153fde99af4db4a67d2a564.jpg)
 
-- **Yield Sign**:  
-  ![Yield Sign](Dataset/test/00120.png)
+- **Signal Sign**:  
+  ![Signal Sign](Dataset/train/images/9a865fec-cf90-4eee-928f-887ec8c2175b_jpg.rf.a4141d63780204ba3ca04b8fa3ce941d.jpg)
 
-- **Speed Limit Sign**:  
-  ![Speed Limit Sign](Dataset/test/00122.png)
+- **Speed Limit**:  
+  ![Speed Limit Sign](Dataset/test/images/000091_jpg.rf.9762d3529d876b77e9d99aa8027e449c.jpg)
 
 ## Datasets
-The dataset used for this project is the **German Traffic Sign Recognition Benchmark (GTSRB)**. It contains over 50,000 images categorized into 43 classes of traffic signs.
+- Dataset Name: Self-Driving Cars - v6 Version 4 - Prescan - 416x416
+- Source: Roboflow
+- Number of Images: 4969
+- Annotation Format: YOLOv8
+- Annotation Classes: Signs
 
 ### Dataset Structure
 ```
@@ -78,7 +82,7 @@ python main.py --eda --data_dir data --output_dir outputs
 ```
 
 ### Model Training
-To train the CNN model on the preprocessed data:
+To train the YOLOv8 model on the preprocessed data:
 
 ```
 python main.py --training --data_dir data --model_dir models --epochs 20 --batch_size 64 --learning_rate 0.001
@@ -98,18 +102,18 @@ python main.py --inference --model_dir models --image_path path/to/image.jpg
 
 ```
 
-### Streamlit Application
-To launch the Streamlit application for interactive traffic sign recognition:
+### Django Application
+To launch the Django application for interactive traffic sign recognition:
 
 ```
-streamlit run scripts/streamlit_app.py -- --model_path models/best_model.h5
+python manage.py runserver
 ```
 
 
 ### Notes
 - **Image Paths**: Ensure to replace `data/Train/00000.png`, etc., with actual paths to your images.
 - **Repository URL**: Replace `<repository-url>` with the actual URL of your GitHub repository.
-- **License**: Ensure you have a LICENSE file if you include a license section.
 
 This `README.md` provides a comprehensive overview of your project, making it easy for users to understand its purpose and how to use it effectively. Let me know if you need further adjustments or additions!
+
 
